@@ -11,7 +11,8 @@ defmodule Scrapper.Application do
       # Starts a worker by calling: Scrapper.Worker.start_link(arg)
       # {Scrapper.Worker, arg}
       PageProducer,
-      PageConsumer
+      Supervisor.child_spec(PageConsumer, id: :consumer_a),
+      Supervisor.child_spec(PageConsumer, id: :consumer_b)
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
