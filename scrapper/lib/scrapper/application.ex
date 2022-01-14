@@ -20,3 +20,6 @@ defmodule Scrapper.Application do
     Supervisor.start_link(children, opts)
   end
 end
+
+# Commands
+# PageProducer.scrape_pages(pages)
