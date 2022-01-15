@@ -10,7 +10,7 @@ defmodule RefElixir.Application do
     children = [
       # Starts a worker by calling: RefElixir.Worker.start_link(arg)
       # {RefElixir.Worker, arg}
-      {Data.Pipeline, []}
+      # {PaymentProc.Pipeline, []}
     ]
 
     # See https://hexdocs.pm/elixir/Supervisor.html
