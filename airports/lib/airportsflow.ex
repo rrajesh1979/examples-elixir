@@ -1,6 +1,6 @@
 defmodule AirportsFlow do
   @moduledoc """
-  Documentation for `Airports`.
+  Documentation for `AirportsFlow`.
   """
 
   alias NimbleCSV.RFC4180, as: CSV
