@@ -1,4 +1,4 @@
-defmodule AirportsFlow do
+defmodule AirportsFlowFast do
   @moduledoc """
   Documentation for `Airports`.
   """
@@ -12,17 +12,22 @@ defmodule AirportsFlow do
   def open_airports() do
     airports_csv()
     |> File.stream!()
-    |> CSV.parse_stream()
     |> Flow.from_enumerable()
     |> Flow.map(fn row ->
+      [row] = CSV.parse_string(row, skip_headers: false)
+
       %{
-        id: :binary.copy(Enum.at(row, 0)),
-        type: :binary.copy(Enum.at(row, 2)),
-        name: :binary.copy(Enum.at(row, 3)),
-        country: :binary.copy(Enum.at(row, 8))
+        id: Enum.at(row, 0),
+        type: Enum.at(row, 2),
+        name: Enum.at(row, 3),
+        country: Enum.at(row, 8)
       }
     end)
     |> Flow.reject(&(&1.type == "closed"))
+    |> Flow.partition(key: {:key, :country})
+    # |> Flow.reduce(fn -> %{} end, fn item, acc ->
+    #   Map.update(acc, item.country, 1, &(&1 + 1))
+    # end)
     |> Enum.to_list()
   end
 end
