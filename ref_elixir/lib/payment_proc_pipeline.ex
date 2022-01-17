@@ -19,14 +19,11 @@ defmodule PaymentProc.Pipeline do
     Logger.info("#{inspect(__MODULE__)} start processing payments")
 
     get_payments()
-    |> Flow.from_enumerables(max_demand: 100)
-    |> Flow.partition(max_demand: 100, stages: 50)
+    |> Flow.from_enumerables(max_demand: 10)
+    |> Flow.partition(max_demand: 10, stages: 5)
     |> Flow.map(&parse_row/1)
-    |> Flow.partition(max_demand: 100, stages: 50)
     |> Flow.reject(&filter_data/1)
-    |> Flow.partition(max_demand: 100, stages: 50)
     |> Flow.map(&credit_check/1)
-    |> Flow.partition(max_demand: 100, stages: 50)
     |> Enum.to_list()
   end
 end

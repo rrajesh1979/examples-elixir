@@ -26,7 +26,11 @@ defmodule RefElixir.MixProject do
       # {:dep_from_git, git: "https://github.com/elixir-lang/my_dep.git", tag: "0.1.0"}
       {:ex_doc, "~> 0.26.0"},
       {:flow, "~> 1.1"},
-      {:nimble_csv, "~> 1.2"}
+      {:nimble_csv, "~> 1.2"},
+      {:opus, "~> 0.8"},
+      {:opus_graph, "~> 0.1", only: [:dev]},
+      {:graphvix, "~> 0.5", only: [:dev]},
+      {:telemetry_metrics, "~> 0.6.1"}
     ]
   end
 end

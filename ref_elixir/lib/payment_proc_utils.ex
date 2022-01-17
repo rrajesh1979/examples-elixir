@@ -11,6 +11,7 @@ defmodule PaymentProc.Utils do
     payment_streams =
       for file <- File.ls!(payment_file_path) do
         File.stream!(payment_file_path <> "/" <> file, read_ahead: 100_000)
+        |> Stream.drop(1)
       end
 
     payment_streams

@@ -1,0 +1,12 @@
+digraph G {
+  node_1 [label="Payment.Pipeline",penwidth="2",href="/Elixir.Payment.Pipeline.html",class="opus-pipeline",tooltip="",color="#222222",fillcolor="#DDDDDD",style="filled"];
+  node_2 [label="step: :add_one",penwidth="2",class="opus-stage",color="#222222",style="filled",fillcolor="#73C6B6",shape="box"];
+  node_4 [label="check: :even?",penwidth="2",class="opus-stage",color="#222222",style="filled",fillcolor="#7FB3D5",shape="box"];
+  node_6 [label="step: :double",penwidth="2",class="opus-stage",color="#222222",style="filled",fillcolor="#73C6B6",shape="box"];
+  node_8 [label="step: :divide",penwidth="2",class="opus-stage",color="#222222",style="filled",fillcolor="#73C6B6",shape="box"];
+
+  node_1 -> node_2;
+  node_2 -> node_4;
+  node_4 -> node_6;
+  node_6 -> node_8;
+}
