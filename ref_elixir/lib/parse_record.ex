@@ -5,7 +5,6 @@ defmodule ParseRecord do
   alias NimbleCSV.RFC4180, as: CSV
 
   step(:parse_record)
-  skip(:skip_record, if: &(&1.status == "CLOSED"))
 
   def parse_record(row) do
     Logger.info("Parsing record: #{row}")

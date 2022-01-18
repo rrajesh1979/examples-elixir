@@ -22,4 +22,9 @@ be found at <https://hexdocs.pm/ref_elixir>.
 ## Commands
 
 > recompile()
-> PaymentProc.process
+> PaymentProc.main()
+
+In the shell, you can use the following command to generate executable code:
+
+> mix escript.build
+> ./ref_elixir

@@ -3,7 +3,7 @@ defmodule PaymentProc do
 
   import PaymentProc.Utils, only: [get_payments: 0]
 
-  def process do
+  def main(args \\ []) do
     Logger.info("#{inspect(__MODULE__)} start processing payments")
 
     get_payments()

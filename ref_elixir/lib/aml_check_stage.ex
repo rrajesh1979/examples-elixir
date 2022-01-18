@@ -2,7 +2,7 @@ defmodule AMLCheck do
   use Opus.Pipeline
   require Logger
 
-  skip(:skip_record, if: &(&1.type != "FRAUDCHK"))
+  skip(:skip_record, if: &(&1.type != "AMLCHK"))
   step(:aml_check)
 
   def aml_check(row) do
