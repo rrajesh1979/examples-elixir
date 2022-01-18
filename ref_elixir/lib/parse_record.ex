@@ -1,10 +1,14 @@
 defmodule ParseRecord do
   use Opus.Pipeline
 
-  skip(:assert_suitable, if: :cacheable?)
-  step(:retrieve_from_cache)
+  require Logger
+  alias NimbleCSV.RFC4180, as: CSV
 
-  def parse_row(row) do
+  step(:parse_record)
+  skip(:skip_record, if: &(&1.status == "CLOSED"))
+
+  def parse_record(row) do
+    Logger.info("Parsing record: #{row}")
     [row] = CSV.parse_string(row, skip_headers: false)
 
     %{
