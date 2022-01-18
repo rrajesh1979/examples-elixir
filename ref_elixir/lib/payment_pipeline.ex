@@ -5,8 +5,10 @@ defmodule PaymentPipeline do
   alias NimbleCSV.RFC4180, as: CSV
 
   step(:parse_row)
-  step(:credit_check, if: &(&1.status != "CLOSED"))
-  step(:fraud_check)
+  skip(:skip_record, if: &(&1.status == "CLOSED"))
+  step(:credit_check, if: &(&1.type == "CREDITCHK"))
+  step(:fraud_check, if: &(&1.type == "FRAUDCHK"))
+  step(:aml_check, if: &(&1.type == "FRAUDCHK"))
   step(:payment_posting)
   step(:cleanup)
 
@@ -54,6 +56,21 @@ defmodule PaymentPipeline do
       row
       | status: "FRAUD_CHK_DONE",
         activity_log: Enum.concat(row.activity_log, ["FRAUD_CHK_DONE"])
+    }
+
+    row_new
+  end
+
+  def aml_check(row) do
+    # For simplicity, this function is
+    # just a placeholder and does not contain
+    # credit check.
+    Logger.info("AML check for #{row.id}")
+
+    row_new = %{
+      row
+      | status: "AML_CHK_DONE",
+        activity_log: Enum.concat(row.activity_log, ["AML_CHK_DONE"])
     }
 
     row_new

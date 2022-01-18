@@ -37,7 +37,7 @@ IEx.configure(
   inspect: [
     pretty: true,
     limit: :infinity,
-    width: 80
+    width: 160
   ],
-  width: 80
+  width: 160
 )
